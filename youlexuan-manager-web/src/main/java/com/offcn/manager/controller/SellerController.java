@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -50,6 +51,18 @@ public class SellerController {
 	@RequestMapping("/add")
 	public Result add(@RequestBody TbSeller seller){
 		try {
+			//查询用户名是否存在
+			TbSeller seller1 = findOne(seller.getSellerId());
+			seller.setStatus("0");
+			seller.setCreateTime(new Date());
+
+
+			if (seller1 != null){
+				return new Result(false,"用户名已经存在");
+			}
+
+
+
 			sellerService.add(seller);
 			return new Result(true, "增加成功");
 		} catch (Exception e) {
