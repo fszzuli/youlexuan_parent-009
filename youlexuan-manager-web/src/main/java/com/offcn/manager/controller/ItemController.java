@@ -4,6 +4,8 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.offcn.entity.PageResult;
 import com.offcn.entity.Result;
 import com.offcn.pojo.TbItem;
+import com.offcn.pojo.TbItemCat;
+import com.offcn.sellergoods.service.ItemCatService;
 import com.offcn.sellergoods.service.ItemService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +24,9 @@ public class ItemController {
 
 	@Reference
 	private ItemService itemService;
-	
+
+	@Reference
+	private ItemCatService itemCatService;
 	/**
 	 * 返回全部列表
 	 * @return
@@ -111,5 +115,7 @@ public class ItemController {
 	public PageResult search(@RequestBody TbItem item, int page, int rows  ){
 		return itemService.findPage(item, page, rows);		
 	}
-	
+
+
+
 }

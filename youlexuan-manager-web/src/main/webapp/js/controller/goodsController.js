@@ -1,4 +1,4 @@
- //控制层 
+ //控制层
 app.controller('goodsController' ,function($scope,$controller   ,goodsService){	
 	
 	$controller('baseController',{$scope:$scope});//继承
@@ -31,27 +31,32 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService){
 		);				
 	}
 	
-	//保存 
+	//保存
 	$scope.save=function(){				
 		var serviceObject;//服务层对象  				
 		if($scope.entity.id!=null){//如果有ID
 			serviceObject=goodsService.update( $scope.entity ); //修改  
 		}else{
-			serviceObject=goodsService.add( $scope.entity  );//增加 
+			$scope.entity.goodsDesc.introduction=editor.html();
+			serviceObject=goodsService.add( $scope.entity  );//增加
+
 		}				
 		serviceObject.success(
 			function(response){
 				if(response.success){
-					//重新查询 
-		        	$scope.reloadList();//重新加载
+					//重新查询
+					alert("保存成功");
+					$scope.entity={};
+
+					$scope.reloadList();//重新加载
 				}else{
 					alert(response.message);
 				}
 			}		
 		);				
 	}
-	
-	 
+
+
 	//批量删除 
 	$scope.dele=function(){			
 		//获取选中的复选框			

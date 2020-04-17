@@ -2,6 +2,7 @@ package com.offcn.sellergoods.service;
 
 import com.offcn.entity.PageResult;
 import com.offcn.pojo.TbItem;
+import com.offcn.pojo.TbItemCat;
 
 import java.util.List;
 
@@ -59,5 +60,7 @@ public interface ItemService {
 	 * @return
 	 */
 	public PageResult findPage(TbItem item, int pageNum, int pageSize);
-	
+
+
+
 }

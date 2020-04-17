@@ -24,6 +24,6 @@
     </mvc:annotation-driven>
     <!-- 引用dubbo 服务 -->
     <dubbo:application name="youlexuan-shop-web" />
-    <dubbo:registry address="zookeeper://192.168.2.103:2181"/>
+    <dubbo:registry address="zookeeper://192.168.188.128:2181"/>
     <dubbo:annotation package="com.offcn.shop.controller" />
 </beans>

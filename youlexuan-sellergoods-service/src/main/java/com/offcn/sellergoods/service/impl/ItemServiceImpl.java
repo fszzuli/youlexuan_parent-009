@@ -4,8 +4,11 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.offcn.entity.PageResult;
+import com.offcn.mapper.TbItemCatMapper;
 import com.offcn.mapper.TbItemMapper;
 import com.offcn.pojo.TbItem;
+import com.offcn.pojo.TbItemCat;
+import com.offcn.pojo.TbItemCatExample;
 import com.offcn.pojo.TbItemExample;
 import com.offcn.pojo.TbItemExample.Criteria;
 import com.offcn.sellergoods.service.ItemService;
@@ -23,7 +26,8 @@ public class ItemServiceImpl implements ItemService {
 
 	@Autowired
 	private TbItemMapper itemMapper;
-	
+
+
 	/**
 	 * 查询全部
 	 */
@@ -120,5 +124,7 @@ public class ItemServiceImpl implements ItemService {
 		Page<TbItem> page= (Page<TbItem>)itemMapper.selectByExample(example);		
 		return new PageResult(page.getTotal(), page.getResult());
 	}
-	
+
+
+
 }

@@ -4,6 +4,8 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.offcn.entity.PageResult;
+import com.offcn.group.Goods;
+import com.offcn.mapper.TbGoodsDescMapper;
 import com.offcn.mapper.TbGoodsMapper;
 import com.offcn.pojo.TbGoods;
 import com.offcn.pojo.TbGoodsExample;
@@ -23,6 +25,9 @@ public class GoodsServiceImpl implements GoodsService {
 
 	@Autowired
 	private TbGoodsMapper goodsMapper;
+
+	@Autowired
+	private TbGoodsDescMapper goodsDescMapper;
 	
 	/**
 	 * 查询全部
@@ -110,5 +115,21 @@ public class GoodsServiceImpl implements GoodsService {
 		Page<TbGoods> page= (Page<TbGoods>)goodsMapper.selectByExample(example);		
 		return new PageResult(page.getTotal(), page.getResult());
 	}
-	
+
+	@Override
+	public void add(Goods goods) {
+
+		goods.getGoods().setAuditStatus("0");//设置未申请状态
+
+		goodsMapper.insert(goods.getGoods());
+
+		goods.getGoodsDesc().setGoodsId(goods.getGoods().getId());//设置id
+
+		//goods.getGoods().getId() 应该美获取到自增主键
+		System.out.println(goods.getGoods().getId());
+
+		goodsDescMapper.insert(goods.getGoodsDesc());//插入商品扩展数据
+
+	}
+
 }

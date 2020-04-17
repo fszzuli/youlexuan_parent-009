@@ -1,6 +1,7 @@
 package com.offcn.sellergoods.service;
 
 import com.offcn.entity.PageResult;
+import com.offcn.group.Goods;
 import com.offcn.pojo.TbGoods;
 
 import java.util.List;
@@ -59,5 +60,11 @@ public interface GoodsService {
 	 * @return
 	 */
 	public PageResult findPage(TbGoods goods, int pageNum, int pageSize);
-	
+
+
+	/**
+	 * 增加，传递组合参数
+	 */
+	public void add(Goods goods);
+
 }

@@ -1,5 +1,5 @@
  //控制层 
-app.controller('sellerController' ,function($scope,$controller   ,sellerService){	
+app.controller('sellerController' ,function($scope,$controller,sellerService){
 	
 	$controller('baseController',{$scope:$scope});//继承
 	
@@ -23,7 +23,7 @@ app.controller('sellerController' ,function($scope,$controller   ,sellerService)
 	}
 	
 	//查询实体 
-	$scope.findOne=function(id){				
+	$scope.findOne=function(id){
 		sellerService.findOne(id).success(
 			function(response){
 				$scope.entity= response;					
@@ -75,6 +75,22 @@ app.controller('sellerController' ,function($scope,$controller   ,sellerService)
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
 			}			
 		);
+	}
+
+	//审核
+	$scope.updateStatus = function (sellerId, status) {
+		sellerService.updateStatus(sellerId,status).success(
+				function (response) {
+					if (response.success){
+						//重新查询
+						$scope.reloadList();//重新加载
+
+					}else {
+						alert(response.message);
+					}
+				}
+
+		)
 	}
     
 });	
